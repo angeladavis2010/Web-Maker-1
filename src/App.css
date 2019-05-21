@@ -3,11 +3,16 @@ body {
     padding-bottom: 75px;
 }
 
-a {
-    text-decoration: none !important;
-}
 nav a, nav button i {
-    color: white;
+  color: white;
+} 
+
+.navbar-light a, .navbar-light span, .navbar-light button {
+   color: black;
+}    
+
+label {
+    font-wieght: 700;
 }
 
 .navbar-light a, .navbar-light span, .navbar-light button i {

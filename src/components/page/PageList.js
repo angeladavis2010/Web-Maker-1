@@ -1,140 +1,86 @@
-import React, { Component } from 'react'
-import {Link}from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 export default class PageList extends Component {
 
-  state = {
+state = {
     uid: "",
     wid: "",
-    name:"",
-    title:""
-  }
+    pages: []
+}
 
+async componentDidMount() {
 
-  async componentDidMount() {
-     await this.setState({
-          uid: this.props.match.params.uid,
-          wid: this.props.match.params.wid,
-          pid: this.props.match.params.pid
-      })
-      const page = this.getPage();
-      this.setState({
-        name: page.name,
-        title: page.title
-      })    
-  }
-  
-  getPage = () => {
-    for(let page of this.props.pages) {
-      if(page._id === this.state.pid) {
-          return page;
-      }
-    }
-
-    return null;
-
-  }
-
-  onChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
+    await this.setState({
+        uid: this.props.match.params.uid,
+        wid: this.props.match.params.wid
     })
 
-  }
-  
-  onDelete = () => {
-      this.props.deletePage(this.state.pid);
-      this.props.history.push(`/user/${this.state.uid}/website/${this.state.wid}/page`)
+    this.filterPage(this.state.wid);
+}
 
-  }
-
-  onSubmit = e => {
-    e.preventDefault();
-    const newPage = {
-        _id: this.state.pid,
-        name: this.state.name,
-        websiteId: this.state.wid,
-        title: this.state.title        
-    }
-    this.props.editPage(newPage);
-    this.props.history.push(`/user/${this.state.uid}/website/${this.state.wid}/page`)
+filterPage = (wid) => {
+     const currentPages = this.props.pages.filter(
+         (page) => (
+              page.websiteId === wid
+         )
+     )
+     this.setState({
+      pages:currentPages
+    })
 }
 
   render() {
-      const {uid, wid, name, title} = this.state
-      return (
-          <div>
-            <nav className="navbar fixed-top navbar-light bg-light">
-                  <Link className="color-black" to={`/user/${uid}/website/${wid}/page`}>
-                    <i className="fas fa-chevron-left" />
-                  </Link>
-                  <span className="navbar-brand">
-                    Edit Page
-                  </span>
-                  <button className="color-black" form="editPageForm">
-                    <i className="fas fa-check" />
-                  </button>
-              </nav>
+      const {uid,wid} = this.state;
+    return (
+      <div>
+        <nav className="navbar fixed-top navbar-light bg-light">
+            <Link className="color-black" to={`/user/${uid}/website`}>
+                <i className="fas fa-chevron-left" />
+            </Link> 
+            <span className="navbar-brand">
+                Pages
+            </span>
+            <Link className="color-black" to={`/user/${uid}/websit/${wid}/page/new`}>
+                <i className="fas fa-plus" />
+            </Link> 
+      </nav>
 
-          <div className="container">
-                <form id="editPageForm">
-                    <div className="form-group">
-                        <label htmlFor="name">
-                        <b>Nmae</b>
-                    </label> 
-                    <input
-                         classNmae="form-control"
-                         id="name"
-                         name="name"
-                         onChange= {this.onChange}
-                         type="text"
-                         placeholder="Name of page..."
-                         value={name}
-                    />
-                  </div>
-                  <div className="form-group">
-                       <label htmlFor="title">
-                           <b>Title</b>
-                       </label>
-                       <input
-                            className="form-control"
-                            type="text"
-                            id="name"
-                            name="name"
-                            onChange={this.onChange}
-                            placeholder="Title of page..."
-                            value={title}
-                       />
-                   </div>
-                   <Link to={`/user/${uid}/website/${wid}/page`} className="btn btn-lg btn-warning">
-                       Cancel
-                   </Link>
-                   <button
-                        type="button"
-                        
-                        className="btn btn-lg btn-danger float-right"
-                    >
-                        Delete
-                    </button>
-                </form>
-            </div>
+        <div className="container">
+            <ul className="list-group">
+                {
+                  this.state.pages.map(
+                    (page) => (
+                        <li key={page._id} className="list-group-item">
+                            <Link to={`/user/${uid}/website/${wid}/page/${page._id}/widget`}>{page.name}</Link>
+                            <Link className="float-right" to={`/user/${uid}/website/${wid}/page/${page._id}`}>
+                            <i className="fas fa-cog" />
+                            </Link>
+                        </li>
+                    )
 
-            <footer className="navbar navbar-light fixed-bottom bg-light">
-                    <div className="full-width">
-                        <Link
-                          className="color=black float-right"
-                          to={`/user/${uid}`}
-                        >
-                          <i className="fas fa-user" />
-                        </Link>
-                    </div>
-                </footer>
-            </div>
-        );
-      }
+                  )
+                }
+                {/* <li className="list-group-item"> 
+                    {/* <li className="list-group-item">
+                    <a href="../widgets/widgets-list.html">Blog Post</a>
+                    <a className="float-right" href="page-edit.html">
+                    <i className="fas fa-cog" />
+    */}
+              </ul>
+    </div>  
+    <footer className="navbar navbar-light fixed-bottom bg-light">
+        <div className="full-width"> 
+            <Link
+                className="color-black float-right"
+                to={`/user/${uid}`}
+            >
+                <i className="fas fa-user" />
+            </Link>
+        </div>
+    </footer>
+</div>
+           
+    )
   }
- 
-
-                
-                  
-    
+}

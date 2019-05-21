@@ -21,13 +21,7 @@ import WidgetEdit from "./components/widget/WidgetEdit";
 class App extends Component {
 
     state = {
-        users: [
-            {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder", email: "alice@gmail.com"},
-            {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley", email: "bob@whatever.com"},
-            {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia", email: "charly@ulem.com"},
-            {_id: "456", username: "shiyu", password: "shiyu", firstName: "Shiyu", lastName: "Wang", email: "swang@ulem.org"}
-          ],
-       websites: [
+        websites: [
           { _id: "123", name: "Facebook", developerId: "456", description: "Lorem" },
           { _id: "234", name: "Tweeter",  developerId: "456", description: "Lorem" },
           { _id: "456", name: "Gizmodo",   developerId: "456", description: "Lorem" },
@@ -47,67 +41,10 @@ class App extends Component {
           { _id: "345", widgetType: "IMAGE", pageId: "321", width: "50%", url: "https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg"},
           { _id: "567", widgetType: "HEADING", pageId: "321", size: 4, text: "Lorem ipsum"},
           { _id: "678", widgetType: "YOUTUBE", pageId: "321", width: "50%", url:"https://www.youtube.com/embed/xa-_FIy2NgE"},           
-         ]
-    }
-    
-    addUser = (user) => {
-        const newUsers = this.state.users;
-
-        newUsers.push(user);
-        this.setState({
-            users: newUsers
-        })
-    }
-
-    
-    userNameInUse = (username) => {
-        for(let user of this.state.users) {
-            if(username === user.username) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    updateUser = (newUser) => {
-        const newUsers = this.state.users.map((user)=>{
-            if(user._id === newUser._id) {
-                if(user.username !== newUser.userName &&
-                this.userNameInUse(newUser.username)) {
-                    alert("This username is taken");
-                } else { 
-                    alert("user information is updated");
-                    user = newUser;
-                }  
-            } 
-            return user;
-        });
-
-        this.setState({
-            users: newUsers
-        })
-
-    }
-    
-
-    updateUser = (newUser) => {
-        const newUsers = this.state.users.map((user)=>{
-            if(user._id === newUser._id) {
-                if(user.username !== newUser.userName &&
-                    this.userNameInUse(newUser.username)) {
-                    alert("This username is taken");
-                } else {
-                    user = newUser;
-                    alert("user information is updated");
-                }
-            }
-            return user;
-        });
+         ]    
         
-        this.setState({
-            users: newUsers
-        })
     }
+
 
     addWeb = (newWeb) => {
         const newWebs = this.StaticRange.websites;
@@ -210,16 +147,16 @@ class App extends Component {
             return (
                 <Router>
                     <Switch>
-                        <Route exact path="/" render= { props =>(<Login {...props} users={this.state.users}/>)} />
-                        <Route exact path="/login" render= { props => (<Login {...props} users={this.state.users}/>)} />  
-                        <Route exact path="/register" render= { props => (<Register {...props} users={this.state.users} addUser={this.addUser}/>)} />
-                        <Route exact path="/user/:uid" render= { props => (<Profile {...props} users={this.state.users} updateUser={this.updateUser}/>)}/>
+                        <Route exact path="/" component={Login} />
+                        <Route exact path="/login" component={Login} />  
+                        <Route exact path="/register" component ={Register} />
+                        <Route exact path="/user/:uid" component={Profile} />
                         <Route exact path="/user/:uid/website" render={ props => (<WebsiteList {...props} websites={this.state.websites}/>)} /> 
                         <Route exact path="/user/:uid/website/new" render={ props => (<WebsiteNew {...props} websites={this.state.websites}/>)} /> 
                         <Route exact path="/user/:uid/website/edit" render={ props => (<WebsiteEdit {...props} websites={this.state.websites} deleteWeb={this.deleteWeb} editWeb={this.editWeb}/>)} />
-                        <Route exact path= "/user/:uid/website/:wid/page" render={props =>(<PageList {...props} pages={this.state.pages}/>)} />
-                        <Route exact path= "/user/:uid/website/:wid/page" render={props =>(<PageNew {...props} pages={this.state.pages} addPage={this.addPage}/>)} />
-                        <Route exact path= "/user/:uid/website/:wid/page" render={props =>(<PageEdit {...props} pages={this.state.pages} editPage={this.editPage} deletePage={this.deletePage} />)} />
+                        <Route exact path= "/user/:uid/website/:wid/pageList" render={props =>(<PageList {...props} pages={this.state.pages}/>)} />
+                        <Route exact path= "/user/:uid/website/:wid/pageNew" render={props =>(<PageNew {...props} pages={this.state.pages} addPage={this.addPage}/>)} />
+                        <Route exact path= "/user/:uid/website/:wid/pageEdit" render={props =>(<PageEdit {...props} pages={this.state.pages} editPage={this.editPage} deletePage={this.deletePage} />)} />
                         <Route exact path= "/user/:uid/website/:wid/page/:pid/widget"render={props =>(<WidgetList {...props} widget={this.state.widgets} />)} />
                         <Route exact path= "/user/:uid/website/:wid/page/:pid/widget/new" render={props =>(<WidgetChooser {...props} addwidget={this.addWidget} />)} />
                         <Route exact path= "/user/:uid/website/:wid/pag/:pid/widget"render={props =>(<WidgetEdit {...props} widget={this.state.widgets} editWidget={this.editWidget} deleteWidget={this.deleteWidget} />)} />                                                                   
