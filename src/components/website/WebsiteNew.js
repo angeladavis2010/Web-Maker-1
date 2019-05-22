@@ -43,7 +43,6 @@ export default class WebsiteNew extends Component {
         await axios.post("/api/website", newWeb);
         this.props.history.push(`/user/${this.state.uid}/website`);
     };
-
     render() {
         const { uid } = this.state;
         return (

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
+
 export default class WidgetList extends Component {
     state= {
         uid: "",
@@ -17,13 +19,8 @@ export default class WidgetList extends Component {
         this.filterWidgets(this.state.pid);
     }
 
-    filterWidgets = (pid) => {
-        const widgets = this.props.widgets.filter(
-            (widget) => (
-                widget.pageId === pid
-            )
-        )
-
+    filterWidgets = async (pid) => {
+        const widgets = await axios.get(`/api/page/${pid}/widget`)
         this.setState({
             widgets
         })
