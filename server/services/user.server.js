@@ -36,7 +36,7 @@ module.exports = function(app) {
     })
     
     // Find user by _id
-     app.get("/spi/uder/:uid", (req, res) => {
+     app.get("/api/user/:uid", (req, res) => {
          const uid = req.params["uid"];
          let user;
          user = users.find((user) =>{

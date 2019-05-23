@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default class PageEdit extends Component {
 
@@ -10,28 +11,21 @@ export default class PageEdit extends Component {
         name: "",
         title: ""
     }
-
     async componentDidMount() {
       await this.setState({
           uid: this.props.match.params.uid,
           wid: this.props.match.params.wid,
           pid: this.props.match.params.pid
       })
-      const page = this.getPage();
-      this.setState({
-          name: page.name,
-          title: page.title
-      })
+      this.getPage();
   }
 
-  getPage = () => {
-    for(let page of this.props.pages) {
-      if(page._id === this.state.pid) {
-          return page;
-      }
-    }
-
-    return null;
+  getPage = async () => {
+      const res = await axios.get(`/api/page/${this.state.pid}`)
+      this.setState({
+        name: res.data.name,
+        title: res.data.title
+    })  
   }
 
   onChange = e => {
@@ -40,12 +34,12 @@ export default class PageEdit extends Component {
     })
 
   }
-  onDelete = () => {
-    this.props.deletePage(this.state.pid);
+  onDelete = async () => {
+    await axios.delete(`/api/page/${this.state.pid}`);   
     this.props.history.push(`/user/${this.state.uid}/website/${this.state.wid}/pages`)
   }
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const newPage = {
       _id: this.state.pid,
@@ -53,7 +47,7 @@ export default class PageEdit extends Component {
       websiteId: this.state.wid,
       title: this.state.title
     }
-    this.props.editPage(newPage);
+    await axios.put("/api/page", newPage);
     this.props.history.push(`/user/${this.state.uid}/website/${this.state.wid}/pages`) 
   }
 

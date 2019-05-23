@@ -17,6 +17,7 @@ export default class Login extends React.Component {
     onSubmit = e => {
         e.preventDefault();
         const {username, password} = this.state;
+
         const user = {
             username, 
             password 
@@ -25,7 +26,7 @@ export default class Login extends React.Component {
     }
 
     login = async user => {
-        const res = await axios.get(`/api/user?username={user.username}&password=${user.password}`)
+        const res = await axios.get(`/api/user?username=${user.username}&password=${user.password}`)
         if(res.data){
             this.props.history.push(`/user/${res.data._id}`)
         } else {

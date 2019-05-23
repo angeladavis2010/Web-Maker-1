@@ -75,7 +75,7 @@ class App extends Component {
                         <Route exact path="/user/:uid" component={Profile} />
                         <Route exact path="/user/:uid/website" component={WebsiteList}  /> 
                         <Route exact path="/user/:uid/website/new" component={WebsiteNew} />
-                        <Route exact path="/user/:uid/website/new" component={WebsiteEdit} />
+                        <Route exact path="/user/:uid/website/:wid" component={WebsiteEdit} />
                         <Route exact path= "/user/:uid/website/:wid/pageList" render={props =>(<PageList {...props} pages={this.state.pages}/>)} />
                         <Route exact path= "/user/:uid/website/:wid/pageNew" render={props =>(<PageNew {...props} pages={this.state.pages} addPage={this.addPage}/>)} />
                         <Route exact path= "/user/:uid/website/:wid/pageEdit" render={props =>(<PageEdit {...props} pages={this.state.pages} editPage={this.editPage} deletePage={this.deletePage} />)} />

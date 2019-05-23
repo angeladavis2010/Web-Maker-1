@@ -8,7 +8,7 @@ module.exports = function(app) {
         { _id: "678", name: "Checkers", developerId: "123", description: "Lorem" },
         { _id: "789", name: "Chess", developerId: "234", description: "Lorem" }
         ];
-
+        
         //  Find all websites for given user id.
         app.get("/api/user/:uid/website", (req, res) => {
             const uid = req.params["uid"];
