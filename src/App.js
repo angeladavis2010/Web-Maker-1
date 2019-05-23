@@ -21,14 +21,19 @@ import WidgetEdit from "./components/widget/WidgetEdit";
 class App extends Component {
 
     state = {
-         widgets: [
-          { _id: "123", widgetType: "HEADING", pageId: "321", size: 2, text: "GIZMODO"},
-          { _id: "234", widgetType: "HEADING", pageId: "321", size: 4, text: "Lorem ipsum"},
-          { _id: "345", widgetType: "IMAGE", pageId: "321", width: "50%", url: "https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg"},
-          { _id: "567", widgetType: "HEADING", pageId: "321", size: 4, text: "Lorem ipsum"},
-          { _id: "678", widgetType: "YOUTUBE", pageId: "321", width: "50%", url:"https://www.youtube.com/embed/xa-_FIy2NgE"},           
-         ]    
-        
+       pages: [
+            {_id: "321", name: "Post 1", websiteId: "456", title: "Lorem" },
+            {_id: "432", name: "Post 2", websiteId: "456", title: "Lorem" },
+            {_id: "543", name: "Post 3", websiteId: "456", title: "Lorem" }
+       ],
+       widgets: [
+           { _id: "123", widgetType: "HEADING", pageId: "321", size: 2, text: "GIZMODO"},
+           { _id: "234", widgetType: "HEADING", pageId: "321", size: 4, text: "Lorem ipsum"},
+           { _id: "345", widgetType: "IMAGE", pageId: "321", width: "50%", url: "https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg"},
+           { _id: "567", widgetType: "HEADING", pageId: "321", size: 4, text: "Lorem ipsum"},
+           { _id: "678", widgetType: "YOUTUBE", pageId: "321", width: "50%", url:"https://www.youtube.com/embed/xa-_FIy2NgE"},           
+        ]    
+         
     }
            
     editWidget = newWidget => {
@@ -76,12 +81,12 @@ class App extends Component {
                         <Route exact path="/user/:uid/website" component={WebsiteList}  /> 
                         <Route exact path="/user/:uid/website/new" component={WebsiteNew} />
                         <Route exact path="/user/:uid/website/:wid" component={WebsiteEdit} />
-                        <Route exact path= "/user/:uid/website/:wid/pageList" render={props =>(<PageList {...props} pages={this.state.pages}/>)} />
-                        <Route exact path= "/user/:uid/website/:wid/pageNew" render={props =>(<PageNew {...props} pages={this.state.pages} addPage={this.addPage}/>)} />
-                        <Route exact path= "/user/:uid/website/:wid/pageEdit" render={props =>(<PageEdit {...props} pages={this.state.pages} editPage={this.editPage} deletePage={this.deletePage} />)} />
-                        <Route exact path= "/user/:uid/website/:wid/page/:pid/widget"render={props =>(<WidgetList {...props} widget={this.state.widgets} />)} />
-                        <Route exact path= "/user/:uid/website/:wid/page/:pid/widget/new" render={props =>(<WidgetChooser {...props} addwidget={this.addWidget} />)} />
-                        <Route exact path= "/user/:uid/website/:wid/pag/:pid/widget"render={props =>(<WidgetEdit {...props} widget={this.state.widgets} editWidget={this.editWidget} deleteWidget={this.deleteWidget} />)} />                                                                   
+                        <Route exact path= "/user/:uid/website/:wid/page" component={PageList} />
+                        <Route exact path= "/user/:uid/website/:wid/page/new" component={PageNew}  />
+                        <Route exact path= "/user/:uid/website/:wid/page/:pid" component={PageEdit} />
+                        <Route exact path= "/user/:uid/website/:wid/page/:pid/widget" component={WidgetList} />
+                        <Route exact path= "/user/:uid/website/:wid/page/:pid/widget/new" component={WidgetChooser} />
+                        <Route exact path= "/user/:uid/website/:wid/page/:pid/widget/wgid" component={WidgetEdit} />                                                                   
                     </Switch>
             </Router>       
         );

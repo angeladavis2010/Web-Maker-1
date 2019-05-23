@@ -18,13 +18,14 @@ export default class PageEdit extends Component {
           pid: this.props.match.params.pid
       })
       this.getPage();
+
   }
 
   getPage = async () => {
-      const res = await axios.get(`/api/page/${this.state.pid}`)
+      const res = await axios.get(`/api/page/${this.state.pid}`);
       this.setState({
-        name: res.data.name,
-        title: res.data.title
+           name: res.data.name,
+           title: res.data.title
     })  
   }
 

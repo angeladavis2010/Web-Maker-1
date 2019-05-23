@@ -4,7 +4,7 @@ module.exports = function(app) {
         {_id: "432", name: "Post 2", websiteId: "456", title: "Lorem" },
         {_id: "543", name: "Post 3", websiteId: "456", title: "Lorem" }
     ];
-
+    
     // Get all pages for this website
     app.get("/api/website/:wid/page", (req, res) => {
         const wid = req.params["wid"];
@@ -12,8 +12,12 @@ module.exports = function(app) {
         result = pages.filter(
              (page) => (page.websiteId === wid)
         );
-
         res.json(result);
+    })
+
+    app.post("/api/page",(req, res) => {
+        const newPage = req.body;
+
     })
 
     // Adding new page
