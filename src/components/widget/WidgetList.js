@@ -20,9 +20,9 @@ export default class WidgetList extends Component {
     }
 
     filterWidgets = async (pid) => {
-        const widgets = await axios.get(`/api/page/${pid}/widget`)
+        const res = await axios.get(`/api/page/${pid}/widget`)
         this.setState({
-            widgets
+            widgets: res.data
         })
     }
 
