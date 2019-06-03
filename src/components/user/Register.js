@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
-import uuid from "uuid";
 import axios from "axios";
 
 export default class Register extends Component {
@@ -37,7 +36,6 @@ export default class Register extends Component {
             return;
         } else {
             const newUser = {
-                _id: uuid(),
                 username,
                 password,
                 email: "",
