@@ -84,7 +84,7 @@ export default class PageEdit extends Component {
                           value={name}
                       />
                     </div>
-                    <div classNmae="form-group">
+                    <div className="form-group">
                          <label htmlFor="title">
                               <b>Title</b>
                          </label>

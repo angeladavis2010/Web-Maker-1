@@ -70,7 +70,7 @@ export default class WidgetChooser extends Component {
                 <Link to="#">Data Table</Link>
             </li>
             <li class="list-group-item">
-                <Link to="#">Reapter</Link>
+                <Link to="#">Repeater</Link>
             </li>
     
           </ul>
