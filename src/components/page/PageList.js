@@ -43,7 +43,7 @@ filterPage = async (wid) => {
             <span className="navbar-brand">
                 Pages
             </span>
-            <Link className="color-black" to={`/user/${uid}/websit/${wid}/page/new`}>
+            <Link className="color-black" to={`/user/${uid}/website/${wid}/page/new`}>
                 <i className="fas fa-plus" />
             </Link> 
       </nav>

@@ -101,7 +101,7 @@ render() {
              <input
                 id="password2"
                 name="password2"
-                type="password2"
+                type="password"
                 className="form-control"
                 value={password2}
                 onChange={this.onChange}

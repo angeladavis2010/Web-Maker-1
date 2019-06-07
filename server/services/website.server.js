@@ -4,7 +4,7 @@ module.exports = function(app) {
         //  Find all websites for given user id.
         app.get("/api/user/:uid/website", async (req, res) => {
             const uid = req.params["uid"];
-            const website = websiteModel.findAllWebsitesForUser(uid);
+            const websites = await websiteModel.findAllWebsitesForUser(uid);
              res.json(websites);                                
         });
 
@@ -25,7 +25,7 @@ module.exports = function(app) {
         app.put("/api/website", async(req, res) => {
             const newWeb = req.body;
             const data = await websiteModel.updateWebsite(newWeb);
-            res,json(data);
+            res.json(data);
         })            
 };
 

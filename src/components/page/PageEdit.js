@@ -80,7 +80,7 @@ export default class PageEdit extends Component {
                           name="name"
                           onChange={this.onChange}
                           type="text"
-                          placeholder="Nmae of the page..."
+                          placeholder="Name of the page..."
                           value={name}
                       />
                     </div>

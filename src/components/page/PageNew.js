@@ -20,7 +20,7 @@ export default class PageNew extends Component {
 
   onChange = e => {
     this.setState({
-      [e.target.name]: e.target.valeu
+      [e.target.name]: e.target.value
     })
   } 
 
@@ -55,7 +55,7 @@ onSubmit = async e => {
           <div className="container">
               <form id="newPageForm" onSubmit={this.onSubmit}>
                   <div className="form-group">
-                      <label htmlfor="name">
+                      <label html for="name">
                            <b>Name</b>
                       </label>
                       <input
@@ -86,7 +86,7 @@ onSubmit = async e => {
                          Cancel
                      </Link>
                      <button
-                          className="btn btn-lg btn-sucess float-right"
+                          className="btn btn-lg btn-success float-right"
                       >
                           Submit
                       </button>

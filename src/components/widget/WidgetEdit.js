@@ -19,7 +19,7 @@ export default class WidgetEdit extends Component {
     }
  
     componentDidMount(){
-      this.gettWidget(this.props.match.params.wgid);
+      this.getWidget(this.props.match.params.wgid);
       this.setState({
           uid: this.props.match.params.uid,
           wid: this.props.match.params.wid,

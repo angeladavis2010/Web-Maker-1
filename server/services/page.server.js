@@ -4,8 +4,8 @@ const pageModel = require("../models/page/page.model");
     // Get all pages for this website
     app.get("/api/website/:wid/page", async (req, res) => {
         const wid = req.params["wid"];
-        const websites = await pageModel.findAllPagesForWebsite(wid);
-        res.json(websites);   
+        const pages = await pageModel.findAllPagesForWebsite(wid);
+        res.json(pages);   
     });
 
     // Adding new page

@@ -4,7 +4,7 @@ const UserModel = mongoose.model("UserModel", UserSchema)
 
 // Create new user into MongoDB
 UserModel.createUser = (user) => {
-    return UserModel.createUser(user);
+    return UserModel.create(user);
 }
 
 // Find user by Credentials

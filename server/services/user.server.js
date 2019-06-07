@@ -12,7 +12,7 @@ module.exports = function(app) {
         }else if (username){
          user = await userModel.findUserByUsername(username);  
         }
-        res.json(usr);
+        res.json(user);
     });
 
     // Create a new user

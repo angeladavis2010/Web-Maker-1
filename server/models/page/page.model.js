@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const PageSchema = require("./page.schema");
-const PageModel = mongoose.modelNames("PageModel", PageSchema)
+const PageModel = mongoose.model("PageModel", PageSchema)
 
 // Find pages for website
 PageModel.findAllPagesForWebsite = (wid) => {

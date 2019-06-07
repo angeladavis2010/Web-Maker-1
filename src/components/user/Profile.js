@@ -62,7 +62,7 @@ export default class Profile extends Component {
             lastName    
         }
         await axios.put("/api/user", newUser);
-        alert("Update Succesfully")
+        alert("Update Successfully")
     }
            
 
