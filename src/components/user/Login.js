@@ -5,14 +5,17 @@ export default class Login extends React.Component {
 
     state = {
         username: "",
-        password: ""
+        password: "",
+        showAlert: false
+
     }
 
     onChange = e => {
        this.setState({
-           [e.target.name]: e.target.value
+           [e.target.name]: e.target.value,
+           showAlert: false
        })
-    } 
+    }
 
     onSubmit = e => {
         e.preventDefault();
@@ -24,19 +27,28 @@ export default class Login extends React.Component {
         }
         this.login(user);
     }
-
     login = async user => {
         const res = await axios.get(`/api/user?username=${user.username}&password=${user.password}`)
         if(res.data){
             this.props.history.push(`/user/${res.data._id}`)
         } else {
-            alert("invalid credential");
+            // alert("invalid credential");
+            this.setState({
+                showAlert: true
+            })
         } 
-    }    
+    } 
+    
+    
     render() { 
         return (
             <div className="container"> 
-            <h1>Login</h1>     
+            <h1>Login</h1> 
+                {
+                    this.state.showAlert?
+                         (<div className="alert alert-danger">Your username and password don't match</div>):null    
+                    
+                }
                 <form onSubmit={this.onSubmit}>
                    <div className="form-group">
                         <label htmlFor="username">Username</label>

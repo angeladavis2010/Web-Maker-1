@@ -7,12 +7,18 @@ export default class Register extends Component {
     state = {
         username: "",
         password: "",
-        password2: ""
+        password2: "",
+        showUsernameAlert: false,
+        showPasswordAlert: false,
+        showUsernameLengthAlert: false,
+        showPasswordLengthAlert: false
     }
 
     onChange = e => {
         this.setState({
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
+        showPasswordAlert: false,
+        showUsernameAlert: false
         })
     }
 
@@ -22,17 +28,39 @@ export default class Register extends Component {
         this.register(username, password, password2);
     }
 
-    register = async (username, password, password2) => {
+    async register(username, password, password2) {
+        // check username length
+        if(username.length <5) {
+            this.setState({
+                showUsernameLengthAlert: true
+            })
+            return;
+        }
+
+        //check password length
+        if(username.length <5) {
+            this.setState({
+                showPasswordLengthAlert: true
+            })
+            return;
+        }
+
         //Does the passwords match
         if(password !== password2) {
-            alert("The passwords are not match");
+            // alert("The passwords are not match");
+            this.setState({
+                showPasswordAlert: true
+            })
             return;
         }
         // Check is username is available
         const res = await axios.get(`/api/user?username=${username}`);
         
         if(res.data) {
-            alert("Username is taken, please try another one");
+            // alert("Username is taken, please try another one");
+            this.setState({
+                showUsernameAlert: true
+            })
             return;
         } else {
             const newUser = {
@@ -44,35 +72,35 @@ export default class Register extends Component {
             };
             const res2 = await axios.post("/api/user", newUser);
             this.props.history.push(`/user/${res2.data._id}`);
-        }
-
-        // check if username is available
-        //for(let user of this.props.users){
-        //    if(user.username === username) {
-        //        alert("Username is taken, please try another one");
-        //        return;
-            
-        // Add new user into users array;
-        //const newUser = {
-        //   _id: uuid(),
-        //    username,
-        //    password,
-        //    email: "",
-        //    firstName: "",
-        //    lastName: ""
-    
-        //};
-        //this.props.addUser(newUser)
-        
-       // //Navigate to profile
-      //this.props.history.push(`/user/${newUser._id}`);
-    }
-
+}
+}           
 render() {
     const{username, password, password2} = this.state
-    return (
-      <div className="container">
+return (
+    <div className="container">
       <h1>Register</h1>
+
+      {this.state.showPasswordAlert && 
+        (<div className="alert alert-danger">
+            The password you entered does not match, please try again
+            </div>)}
+
+      {this.state.showUsernameAlert && 
+        (<div className="alert alert-danger">
+            The username is taken, please try another one
+            
+            </div>)}
+
+      {this.state.showUsernameLengthAlert && 
+        (<div className="alert alert-danger">
+          your username is too short, please use at least 6 characters  
+            </div>)}
+
+      {this.state.showPasswordLengthAlert && 
+        (<div className="alert alert-danger">
+            Your password is too short, please make it 6 characters or more
+            </div>)}
+
       <form onSubmit={this.onSubmit}>
           <div className="form-group">
                <label htmlFor="username">Username</label>

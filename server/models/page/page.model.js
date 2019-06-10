@@ -9,12 +9,12 @@ PageModel.findAllPagesForWebsite = (wid) => {
 
 //Create page
 PageModel.createPage = (page) => {
-    return PageModel.createPage(page);
+    return PageModel.create(page);
 }
 
 // Find page by its id
 PageModel.findPageById = (pid) => {
-    return PageModel.findPageById(pid);
+    return PageModel.findById(pid);
 }
 
 // Delete page

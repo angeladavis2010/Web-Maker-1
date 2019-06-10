@@ -3,7 +3,7 @@ module.exports = function(app) {
     const widgetModel = require("../models/widget/widget.model");
 
     // Find all widgets by given page id
-    app.get("/app/page/:pid/widget", async (req, res)=>{
+    app.get("/api/page/:pid/widget", async (req, res)=>{
         const pid = req.params['pid'];
         const widgets = await widgetModel.findWidgetsForPage(pid);
         res.json(widgets);   

@@ -9,7 +9,7 @@ export default class WidgetChooser extends Component {
       const newWidget = {
         name: "",
         widgetType: type,
-        pageId: pid, 
+        pageId: pid,
         text: "",
         size: 1,
         width: "",
@@ -44,32 +44,32 @@ export default class WidgetChooser extends Component {
                       Heading
                   </span>
               </li>
-              <li class="list-group-item">
+              <li className="list-group-item">
                   <Link to="#">Label</Link>
             </li>
-            <li class="list-group-item">
+            <li className="list-group-item">
                 <Link to="#">Text Input</Link>
             </li>
-            <li class="list-group-item">
+            <li className="list-group-item">
                 <Link to="#">Link</Link>
             </li>
-            <li class="list-group-item">
+            <li className="list-group-item">
                 <Link to="#">Button</Link>
             </li>
-            <li class="list-group-item">
+            <li className="list-group-item">
                 <span onClick={this.createWidget.bind(this, "IMAGE")}>
                     Image
                 </span>
             </li>
-            <li class="list-group-item">
+            <li className="list-group-item">
                 <span onClick={this.createWidget.bind(this, "YOUTUBE")}>
                     Youtube
                 </span>
             </li>
-            <li class="list-group-item">
+            <li className="list-group-item">
                 <Link to="#">Data Table</Link>
             </li>
-            <li class="list-group-item">
+            <li className="list-group-item">
                 <Link to="#">Repeater</Link>
             </li>
     

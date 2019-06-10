@@ -78,6 +78,7 @@ export default class Profile extends Component {
                     </button>
                 </nav>
                 <div className='container'>
+                    <div className="alert alert-successfully">Update Successfully</div>
                     <form id="profileForm" onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
